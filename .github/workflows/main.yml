@@ -1,0 +1,48 @@
+name: Run Python Script
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 'latest'
+
+    - name: Install Selenium
+      run: |
+        python -m pip install --upgrade pip
+        pip install selenium
+
+    - name: Install Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
+        google-chrome --version
+
+    - name: Install ChromeDriver
+      run: |
+        CHROME_DRIVER_VERSION=114.0.5735.90
+        wget https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
+        unzip chromedriver_linux64.zip
+        sudo mv chromedriver /usr/local/bin/
+        chromedriver --version
+
+    - name: Clone repository
+      run: |
+        git clone https://github.com/Sixfeet6/zkg.git
+        cd zkg
+
+    - name: Run Python script
+      run: |
+        cd zkg
+        python 1.py
