@@ -2,7 +2,7 @@ name: Run Python Script
 
 on:
   schedule:
-    - cron: "0 7 * * *"   # <=== Change this value
+    - cron: '0 7 * * *'
 
 jobs:
   run-script:
