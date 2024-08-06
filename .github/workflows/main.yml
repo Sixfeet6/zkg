@@ -1,8 +1,8 @@
 name: Run Python Script
 
 on:
-  schedule:
-    - cron: '0 7 * * *'
+  schedule:          # 定时任务 第一个填分钟 第二个填小时
+    - cron:  0 7 * * *   # 想要运行的小时-8即为填入值例如：bj11点运行 填11-8=3
 
 jobs:
   run-script:
